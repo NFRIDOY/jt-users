@@ -3,9 +3,9 @@ import { IoIosMail } from "react-icons/io";
 import { FaHome } from "react-icons/fa";
 import { FaCity } from "react-icons/fa6";
 import { FaRoad } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
-export default function UserCard({ user }) {
+export default function UserDetails() {
 
     const getStreet = (address) => {
         let street;
@@ -16,8 +16,10 @@ export default function UserCard({ user }) {
         return (street?.[1] + " " + street?.[2]);
     }
 
+    const user = useLoaderData();
+    console.log(user);
     return (
-        <Link to={`/UserDetails/${user?.id}`} className="card w-96 bg-base-100 shadow-xl border-2 hover:scale-105 hover:border-accent duration-1000	transition-duration: 500ms">
+        <div className="card w-96 bg-base-100 shadow-xl border-2 hover:scale-105 hover:border-accent duration-1000	transition-duration: 500ms">
             <figure className='border-b-4 mb-0 py-4 flex justify-between gap-x-5 border-accent'>
                 <div className="avatar border-4 border-accent rounded-full">
                     <div className="w-24 rounded-full">
@@ -49,28 +51,28 @@ export default function UserCard({ user }) {
                         </p>
                     </div>
                     {/* <div>
-                        <p>
-                            {user?.address?.address}
-                        </p>
-                        <p>
-                            Street: {getStreet(user?.address?.address)}
-                        </p>
-                        <p>
-                            City: {user?.address?.city}
-                        </p>
-                    </div> */}
+                    <p>
+                        {user?.address?.address}
+                    </p>
+                    <p>
+                        Street: {getStreet(user?.address?.address)}
+                    </p>
+                    <p>
+                        City: {user?.address?.city}
+                    </p>
+                </div> */}
                 </div>
                 <p className='card-title font-black border-t-2 border-accent mt-16 pt-5 flex justify-center'>
                     {user?.company?.name}
                 </p>
                 {/* <div className="card-actions justify-end">
-                    <button className="btn btn-accent">Buy Now</button>
-                </div> */}
+                <button className="btn btn-accent">Buy Now</button>
+            </div> */}
             </div>
-        </Link>
+        </div>
     )
 }
 
-UserCard.propTypes = {
+UserDetails.propTypes = {
     user: PropTypes.node
 }
