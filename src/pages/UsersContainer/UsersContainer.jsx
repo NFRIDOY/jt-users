@@ -35,7 +35,9 @@ export default function UsersContainer() {
 
         console.log(search);
 
-        const searchArray = usersData.filter((user) => user.firstName.toLowerCase() === search.toLowerCase());
+        // const margeName = usersData.map((user) => user.firstName + user.lastName)
+        // console.log(margeName);
+        const searchArray = usersData.filter((user) => ((user.firstName.toLowerCase() === search.toLowerCase()) || (user.lastName.toLowerCase() === search.toLowerCase())))
         console.log(searchArray);
         setFilter(searchArray);
         // if (search !== "") 
@@ -44,13 +46,13 @@ export default function UsersContainer() {
     return (
         <div className="py-20">
             <form onSubmit={handleSearch} className="mx-auto my-5 w-fit flex gap-2 border-0">
-                <input type="text" name="search" placeholder="Type here" className="input input-bordered w-full max-w-xs" /> <button className="btn btn-warning"><FaSearch /></button>
+                <input onKeyUp={handleSearch} type="text" name="search" placeholder="Type here" className="input input-bordered w-full max-w-xs" /> <button className="btn btn-warning"><FaSearch /></button>
             </form>
             <div className="mx-auto w-fit border-0">
 
                 <div className=" grid grid-cols-1  md:grid-cols-2 md:gap-x-8 md:gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-8">
                     {
-                        search === "" ? usersData?.map((user, index) => <UserCard key={user} user={user} index={index} />): filter?.map((user, index) => <UserCard key={user} user={user} index={index} />)
+                        search === "" ? usersData?.map((user, index) => <UserCard key={user} user={user} index={index} />) : filter?.map((user, index) => <UserCard key={user} user={user} index={index} />)
                     }
                 </div>
             </div>
