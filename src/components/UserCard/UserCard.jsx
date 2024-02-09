@@ -25,9 +25,9 @@ export default function UserCard({ user }) {
                     </div>
                 </div>
                 <div>
-                    <div className='flex space-x-0 gap-x-3'>
-                        <h2 className="card-title text-3xl">{user?.lastName}</h2>
-                        <h2 className="card-title text-3xl text-accent">{user?.firstName}</h2>
+                    <div className='flex space-x-0 gap-x-2'>
+                        <h2 className="card-title text-3xl ">{user?.firstName}</h2>
+                        <h2 className="card-title text-3xl text-accent">{user?.lastName}</h2>
                     </div>
                     <h2 className="mt-6"><IoIosMail style={{ display: "inline" }} />
                         <span className='text-blue-600 font-bold ml-2'>
