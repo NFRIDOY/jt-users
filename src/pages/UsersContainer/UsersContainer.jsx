@@ -17,6 +17,7 @@ export default function UsersContainer() {
 
 
 
+
     useEffect(() => {
         const getUsers = async () => {
             const res = await fetch("https://dummyjson.com/users");
@@ -26,7 +27,10 @@ export default function UsersContainer() {
 
         }
         getUsers();
-    }, [])
+    }, [usersData])
+
+    const [sortedData, setSortedData] = useState([...usersData]);
+    const [sortBy, setSortBy] = useState("");
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -43,18 +47,73 @@ export default function UsersContainer() {
         // if (search !== "") 
     }
 
+    // const handleSort = (e) => {
+    //     e.preventDefault();
+    //     const search = e.target.search.value;
+    //     setSearch(search);
+
+    //     console.log(search);
+
+    //     // const margeName = usersData.map((user) => user.firstName + user.lastName)
+    //     // console.log(margeName);
+    //     const searchArray = usersData.filter((user) => ((user.firstName.toLowerCase() === search.toLowerCase()) || (user.lastName.toLowerCase() === search.toLowerCase())))
+    //     console.log(searchArray);
+    //     setFilter(searchArray);
+    //     // if (search !== "") 
+    // }
+
+
+
+    const sortData = (criteria) => {
+        const sorted = [...usersData].sort((a, b) => {
+            if (criteria === 'name') {
+                return a?.firstName.localeCompare(b?.firstName);
+            } else if (criteria === 'email') {
+                return a?.email.localeCompare(b?.email);
+            } else if (criteria === 'company') {
+                return a?.company?.name.localeCompare(b?.company?.name);
+            }
+            return 0;
+        });
+        setSortedData(sorted);
+        setSortBy(criteria);
+    };
+
     return (
-        <div className="py-20">
-            <form onSubmit={handleSearch} className="mx-auto my-5 w-fit flex gap-2 border-0">
-                <input onKeyUp={handleSearch} type="text" name="search" placeholder="Type here" className="input input-bordered w-full max-w-xs" /> <button className="btn btn-warning"><FaSearch /></button>
-            </form>
+        <div className="py-20 max-w-[1200px] mx-auto">
+            <div className="mx-auto w-full flex justify-between items-center">
+                <form onSubmit={handleSearch} className=" my-5 flex gap-2 border-0">
+                    <input onKeyUp={handleSearch} type="text" name="search" placeholder="Type here" className="input input-bordered w-full max-w-xs" /> <button className="btn btn-warning"><FaSearch /></button>
+                </form>
+                <div>
+                    {/* <label htmlFor="sort">Sort by:</label> */}
+                    <select
+                        id="sort"
+                        onChange={(e) => sortData(e.target.value)}
+                        value={sortBy || ''}
+                        className="select select-bordered border-2 border-warning w-full max-w-xs"
+                    >
+                        <option value="">Select Sorting Option</option>
+                        <option value="name">Name</option>
+                        <option value="email">Email</option>
+                        <option value="company">Company</option>
+                    </select>
+                </div>
+            </div>
             <div className="mx-auto w-fit border-0">
 
-                <div className=" grid grid-cols-1  md:grid-cols-2 md:gap-x-8 md:gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-8">
-                    {
-                        search === "" ? usersData?.map((user, index) => <UserCard key={user} user={user} index={index} />) : filter?.map((user, index) => <UserCard key={user} user={user} index={index} />)
-                    }
-                </div>
+                {
+                    sortBy === "" ? <div className=" grid grid-cols-1  md:grid-cols-2 md:gap-x-8 md:gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-8">
+                        {
+                            search === "" ? usersData?.map((user, index) => <UserCard key={user} user={user} index={index} />) : filter?.map((user, index) => <UserCard key={user} user={user} index={index} />)
+                        }
+                    </div> : <div className=" grid grid-cols-1  md:grid-cols-2 md:gap-x-8 md:gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-8">
+                        {
+                            search === "" ? sortedData?.map((user, index) => <UserCard key={user} user={user} index={index} />) : filter?.map((user, index) => <UserCard key={user} user={user} index={index} />)
+                        }
+                    </div>
+                }
+
             </div>
         </div>
     )
