@@ -6,10 +6,11 @@ Email
 Address (Street, Suite, City)
 Company Name 
 */}
+import PropTypes from 'prop-types';
+import uniqid from 'uniqid';
 
 
-
-export default function AddUser({ setUsersData, usersData, setNewUser, newUser }) {
+export default function AddUser({ setNewUser, newUser }) {
 
     const handleAddUser = (e) => {
         e.preventDefault();
@@ -23,6 +24,7 @@ export default function AddUser({ setUsersData, usersData, setNewUser, newUser }
         const companyName = form.companyName.value;
 
         const newUserObj = {
+            id: uniqid(),
             firstName,
             lastName,
             email,
@@ -107,4 +109,10 @@ export default function AddUser({ setUsersData, usersData, setNewUser, newUser }
 
         </div>
     )
+}
+
+AddUser.propTypes = {
+    newUser: PropTypes.node,
+    setNewUser: PropTypes.node,
+
 }

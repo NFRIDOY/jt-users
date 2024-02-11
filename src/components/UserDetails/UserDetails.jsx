@@ -20,16 +20,16 @@ export default function UserDetails() {
     const user = useLoaderData();
     console.log(user);
     return (
-        <div className="card w-full h-screen bg-base-100 shadow-xl my-10">
-            <section className='flex justify-center pl-10'>
-                <figure className=' mb-0 py-4 flex justify-between gap-x-5 '>
-                    <div className="avatar border-4 border-accent rounded-full">
+        <div className="card flex md:flex-row justify-center w-full h-screen bg-base-100 shadow-xl">
+            <section className='flex  justify-center lg:pl-10'>
+                <figure className=' lg:mb-0 mx-auto py-0 flex flex-col md:flex-row justify-between gap-x-5 '>
+                    <div className="avatar mb-10 lg:mb-0 border-4 border-accent rounded-full">
                         <div className="rounded-full">
                             <img src={user?.image} />
                         </div>
                     </div>
                     <div>
-                        <div className='flex space-x-0 gap-x-3'>
+                        <div className='flex justify-center gap-x-3 text-center w-fit mx-auto border-0'>
                             <h2 className="card-title text-3xl ">{user?.firstName}</h2>
                             <h2 className="card-title text-3xl text-accent">{user?.lastName}</h2>
                         </div>
