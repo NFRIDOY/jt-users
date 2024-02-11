@@ -14,12 +14,12 @@ import NoDataFound from "../../components/NoDataFound/NoDataFound";
 export default function UsersContainer() {
 
     const [usersData, setUsersData] = useState([]);
-    const [filter, setFilter] = useState([]);
+    const [filter, setFilter] = useState(null);
     const [search, setSearch] = useState("");
     const [newUser, setNewUser] = useState([]);
 
 
-
+    const [sortBy, setSortBy] = useState("");
 
     useEffect(() => {
         const getUsers = async () => {
@@ -30,10 +30,10 @@ export default function UsersContainer() {
 
         }
         getUsers();
-    }, [])
+    }, [sortBy])
 
     const [sortedData, setSortedData] = useState([...usersData]);
-    const [sortBy, setSortBy] = useState("");
+
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -49,6 +49,10 @@ export default function UsersContainer() {
         setFilter(searchArray);
         // if (search !== "") 
     }
+
+    // const handleSearchOnBlur = () => {
+    //     alert("Please Clear The Search and Click again The Search Button Or Refresh")
+    // }
     /**
      * @param {sortType like name, email, company}
      * newUser is concat with Userdate theke it has been spread(...) then sort by sortType.
@@ -68,6 +72,8 @@ export default function UsersContainer() {
         setSortedData(sorted);
         setSortBy(sortType);
     };
+
+    
 
     return (
         <div className="py-20 lg:max-w-[1200px] mx-auto">
@@ -97,7 +103,8 @@ export default function UsersContainer() {
             <div className="mx-auto w-fit border-0">
 
                 {
-                    sortBy === "" ? <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-3 md:gap-x-2 md:gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-8">
+                    // sortBy === "" ? <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-3 md:gap-x-2 md:gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-8">
+                    sortBy === "" ? <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 md:gap-x-2 md:gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-8 relative">
                         {
                             search === "" ? usersData.concat(newUser)?.map((user, index) => <UserCard key={user} user={user} index={index} />) : filter?.length !== 0 ? filter.concat(newUser)?.map((user, index) => <UserCard key={user} user={user} index={index} />) : <NoDataFound />
                         }
@@ -107,6 +114,7 @@ export default function UsersContainer() {
                         }
                     </div>
                 }
+
 
             </div>
             {
