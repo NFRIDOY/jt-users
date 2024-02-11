@@ -9,13 +9,13 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
-        errorElement: <div> Error </div>,
+        // errorElement: <div> Error </div>,
         children: [
             {
                 path: "/",
                 element: <UsersContainer />,
-                loader: () => fetch("https://dummyjson.com/users"),
-                errorElement: <div> Error </div>,
+                // loader: () => fetch("https://dummyjson.com/users"),
+                // errorElement: <div> Error </div>,
             },
             {
                 path: "/UserDetails/:id",

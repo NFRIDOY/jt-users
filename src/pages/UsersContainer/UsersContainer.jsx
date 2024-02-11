@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import UserCard from "../../components/UserCard/UserCard";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import AddUser from "../AddUser/AddUser";
 
 
 export default function UsersContainer() {
@@ -15,8 +16,8 @@ export default function UsersContainer() {
     const [filter, setFilter] = useState([]);
     const [searchArray, setSearchArray] = useState("");
     const [search, setSearch] = useState("");
-    const [newUser, setNewUser] = useState({});
-    
+    const [newUser, setNewUser] = useState([]);
+
 
 
 
@@ -70,9 +71,10 @@ export default function UsersContainer() {
                 <form onSubmit={handleSearch} className=" my-5 flex gap-2 border-0">
                     <input onKeyUp={handleSearch} type="text" name="search" placeholder="Type here" className="input input-bordered w-full max-w-xs" /> <button className="btn btn-accent text-white"><FaSearch /></button>
                 </form>
-                <Link to={"/addUser"} className="btn btn-accent text-white">
+                {/* <Link to={"/addUser"} className="btn btn-accent text-white">
                     Add New User
-                </Link>
+                </Link> */}
+
                 <div>
                     {/* <label htmlFor="sort">Sort by:</label> */}
                     <select
@@ -93,7 +95,7 @@ export default function UsersContainer() {
                 {
                     sortBy === "" ? <div className=" grid grid-cols-1  md:grid-cols-2 md:gap-x-8 md:gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-8">
                         {
-                            search === "" ? usersData?.map((user, index) => <UserCard key={user} user={user} index={index} />) : filter?.map((user, index) => <UserCard key={user} user={user} index={index} />)
+                            search === "" ? usersData.concat(newUser)?.map((user, index) => <UserCard key={user} user={user} index={index} />) : filter?.map((user, index) => <UserCard key={user} user={user} index={index} />)
                         }
                     </div> : <div className=" grid grid-cols-1  md:grid-cols-2 md:gap-x-8 md:gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-8">
                         {
@@ -103,6 +105,12 @@ export default function UsersContainer() {
                 }
 
             </div>
+            <AddUser usersData={usersData} setUsersData={setUsersData} setNewUser={setNewUser} newUser={newUser} />
+            {/* <div>
+                {
+                    newUser?.map((user, index) => <UserCard key={user} user={user} index={index} />)
+                }
+            </div> */}
         </div>
     )
 }

@@ -7,31 +7,40 @@ Address (Street, Suite, City)
 Company Name 
 */}
 
-const handleAddUser = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const fName = form.fName.value;
-    const lName = form.lName.value;
-    const email = form.email.value;
-    const avatar = form.avatar.value;
-    const address = form.address.value;
-    const city = form.city.value;
-    const companyName = form.companyName.value;
 
-    const userObj = {
-        fName,
-        lName,
-        email,
-        avatar,
-        address,
-        city,
-        companyName
+
+export default function AddUser({ setUsersData, usersData, setNewUser, newUser }) {
+
+    const handleAddUser = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const firstName = form.fName.value;
+        const lastName = form.lName.value;
+        const email = form.email.value;
+        const image = form.avatar.value;
+        const address = form.address.value;
+        const city = form.city.value;
+        const companyName = form.companyName.value;
+
+        const newUserObj = {
+            firstName,
+            lastName,
+            email,
+            image,
+            address: {
+                address: address,
+                city: city,
+            },
+            company: {
+                name: companyName
+            }
+
+        }
+
+        // console.log(setUsersData([...usersData, newUserObj]));
+        console.log(setNewUser([...newUser, newUserObj]));
+        console.log(newUserObj);
     }
-    
-    console.log(userObj);
-}
-
-export default function AddUser() {
     return (
         <div className="">
             <h1 className="text-center text-3xl font-bold py-10">Fill Up The Form To Entry New User</h1>
