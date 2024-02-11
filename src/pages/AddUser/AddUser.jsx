@@ -47,7 +47,7 @@ export default function AddUser({ setNewUser, newUser }) {
         <div className="">
             <h1 className="text-center text-lg lg:text-3xl font-bold py-10 ">Fill Up The Form To Entry New User</h1>
             <form className="card-body w-11/12 lg:w-[500px] mx-auto border-2 rounded-xl" onSubmit={handleAddUser}>
-                <section className="flex flex-col md:flex-row justify-between gap-x-2">
+                <section className="flex flex-col lg:flex-row justify-between gap-x-2">
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">First Name</span>
@@ -61,7 +61,7 @@ export default function AddUser({ setNewUser, newUser }) {
                         <input type="text" name="lName" id="" placeholder="type" className="input input-bordered" required />
                     </div>
                 </section>
-                <section className="flex flex-col md:flex-row justify-between gap-x-2">
+                <section className="flex flex-col lg:flex-row justify-between gap-x-2">
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Email</span>
