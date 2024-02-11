@@ -41,9 +41,11 @@ export default function UserCard({ user }) {
                 <div className='flex flex-col'>
                     <div className=" text-sm text-gray-500 flex flex-col items-start">
                         <h2><FaHome style={{ display: "inline" }} /> {user?.address?.address}</h2>
-                        <p >
-                            <FaRoad style={{ display: "inline" }} /> {getStreet(user?.address?.address)},
-                        </p>
+                        {
+                            getStreet(user?.address?.address) && <p >
+                                <FaRoad style={{ display: "inline" }} /> {getStreet(user?.address?.address)},
+                            </p>
+                        }
                         <p>
                             <FaCity style={{ display: "inline" }} /> {user?.address?.city}
                         </p>

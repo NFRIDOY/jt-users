@@ -8,6 +8,7 @@ import UserCard from "../../components/UserCard/UserCard";
 import { FaSearch } from "react-icons/fa";
 
 import AddUser from "../AddUser/AddUser";
+import NoDataFound from "../../components/NoDataFound/NoDataFound";
 
 
 export default function UsersContainer() {
@@ -72,7 +73,7 @@ export default function UsersContainer() {
         <div className="py-20 lg:max-w-[1200px] mx-auto">
             <div className="mx-auto w-full mb-8 flex flex-col md:flex-row lg:flex-row justify-between items-center">
                 <form onSubmit={handleSearch} className=" my-5 flex gap-2 border-0">
-                    <input onKeyUp={handleSearch} type="text" name="search" placeholder="Type here" className="input input-bordered w-full max-w-xs" /> <button className="btn btn-accent text-white"><FaSearch /></button>
+                    <input type="text" name="search" placeholder="Type here" className="input input-bordered w-full max-w-xs" /> <button className="btn btn-accent text-white"><FaSearch /></button>
                 </form>
                 {/* <Link to={"/addUser"} className="btn btn-accent text-white">
                     Add New User
@@ -98,7 +99,7 @@ export default function UsersContainer() {
                 {
                     sortBy === "" ? <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-3 md:gap-x-2 md:gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-8">
                         {
-                            search === "" ? usersData.concat(newUser)?.map((user, index) => <UserCard key={user} user={user} index={index} />) : filter.concat(newUser)?.map((user, index) => <UserCard key={user} user={user} index={index} />)
+                            search === "" ? usersData.concat(newUser)?.map((user, index) => <UserCard key={user} user={user} index={index} />) : filter?.length !== 0 ? filter.concat(newUser)?.map((user, index) => <UserCard key={user} user={user} index={index} />) : <NoDataFound />
                         }
                     </div> : <div className=" grid grid-cols-1  md:grid-cols-2 md:gap-x-8 md:gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-8">
                         {
@@ -108,7 +109,9 @@ export default function UsersContainer() {
                 }
 
             </div>
-            <AddUser setNewUser={setNewUser} newUser={newUser} />
+            {
+                search === "" && <AddUser setNewUser={setNewUser} newUser={newUser} />
+            }
             {/* <div>
                 {
                     newUser?.map((user, index) => <UserCard key={user} user={user} index={index} />)
