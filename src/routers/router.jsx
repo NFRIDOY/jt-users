@@ -3,6 +3,7 @@ import App from "../App";
 import MainLayout from "../layouts/MainLayout";
 import UserDetails from "../components/UserDetails/UserDetails";
 import UsersContainer from "../pages/UsersContainer/UsersContainer";
+import AddUser from "../pages/AddUser/AddUser";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +20,13 @@ const router = createBrowserRouter([
             {
                 path: "/UserDetails/:id",
                 element: <UserDetails />,
-                loader: ({params}) => fetch(`https://dummyjson.com/users/${params.id}`),
+                loader: ({ params }) => fetch(`https://dummyjson.com/users/${params.id}`),
+                // errorElement: <div> Error </div>,
+            },
+            {
+                path: "/addUser",
+                element: <AddUser />,
+                loader: ({ params }) => fetch(`https://dummyjson.com/users/${params.id}`),
                 // errorElement: <div> Error </div>,
             },
 
